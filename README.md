@@ -1,2 +1,2 @@
-# craft-base
-Craft CMS starter project
+# Craft Base
+Craft CMS starter project for websites
