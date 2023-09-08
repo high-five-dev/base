@@ -1,3 +1,6 @@
+.RECIPEPREFIX +=
+.DEFAULT_GOAL := help
+
 DDEV := $(shell command -v ddev 2> /dev/null)
 
 DDEV_CONFIGURED := $(shell command ddev describe 2> /dev/null)
@@ -9,7 +12,11 @@ DDEV_TLD ?= $(shell bash -c 'read -p "Domain tld [test]" tmp; echo $${tmp:-test}
 
 DDEV_NAME := $(shell echo $$(TMP=$$(basename $(CURDIR)); echo $${TMP%.*}))
 
-conf:
+help:
+	@echo "  \033[33mUsage:\033[0m make [target] [arg=\"val\"...]\n\033[0m"
+	@grep -E '^[-a-zA-Z0-9_\.\/]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[32m%-15s\033[0m %s\n", $$1, $$2}'
+
+conf: ## Create ddev config
 ifndef DDEV
 	@echo "\033[91m🙀 Ddev is not available, install it first!\033[0m";
 	@exit 1
@@ -28,7 +35,7 @@ ifndef DDEV_CONFIGURED
 	@ddev get drud/ddev-cron
 endif
 
-up:
+up: ## Start dev environment
 	@if [ ! "$$(ddev describe | grep OK)" ]; then \
 		ddev auth ssh; \
 		ddev start; \
@@ -37,24 +44,24 @@ up:
 		echo "\033[95m🤖 Already running...\033[0m"; \
 	fi
 
-down:
+down: ## Stop dev environment
 	@ddev stop
 
-install:
+install: ## Install dependencies
 	@ddev composer install
 	@ddev npm i
 
-dev:
+dev: ## Start dev server
 	@ddev npm run dev
 
-build:
+build: ## Build for production
 	@ddev npm run build
 
-db-export:
+db-export: ## Export database
 	@mkdir -p sql
 	@ddev export-db -f sql/$$(date +%Y%m%d%H%M%S)-backup.sql.gz
 
-clean:
+clean: ## Clean project
 	@echo "\033[95m🧹 Cleaning project...\033[0m"
 	@git init -q
 	@git add .
