@@ -24,7 +24,7 @@ ifndef DDEV_CONFIGURED
 		--docroot=httpdocs --create-docroot \
 		--project-name=$(DDEV_NAME) \
 		--project-tld=$(DDEV_TLD) \
-		--timezone="Europe/Amsterdam" \
+		--timezone="Europe/Amsterdam"
 	@ddev get drud/ddev-cron
 endif
 
