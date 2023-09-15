@@ -17,7 +17,7 @@ After the project has been created, start the local development server using the
 
     make start
 
-## `make`` commands
+## `make` commands
 
 Run `make` or `make help` for an overview of the available commands.
 
