@@ -1,7 +1,7 @@
 {
     "name": "high-five/craft-base",
     "version": "0.0.0",
-    "description": "The base for High Five Craft CMS websites.",
+    "description": "Easily create a barebones Craft CMS website project.",
     "authors": [
         {
             "name": "High Five",

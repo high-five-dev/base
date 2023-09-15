@@ -16,7 +16,7 @@ help:
 	@echo "  \033[33mUsage:\033[0m make [target] [arg=\"val\"...]\n\033[0m"
 	@grep -E '^[-a-zA-Z0-9_\.\/]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[32m%-15s\033[0m %s\n", $$1, $$2}'
 
-conf: ## Create ddev config
+conf:
 ifndef DDEV
 	@echo "\033[91m🙀 Ddev is not available, install it first!\033[0m";
 	@exit 1
@@ -35,7 +35,7 @@ ifndef DDEV_CONFIGURED
 	@ddev get drud/ddev-cron
 endif
 
-up: ## Start dev environment
+up:
 	@if [ ! "$$(ddev describe | grep OK)" ]; then \
 		ddev auth ssh; \
 		ddev start; \
@@ -44,14 +44,14 @@ up: ## Start dev environment
 		echo "\033[95m🤖 Already running...\033[0m"; \
 	fi
 
-down: ## Stop dev environment
+stop: ## Stop DDev environment
 	@ddev stop
 
 install: ## Install dependencies
 	@ddev composer install
 	@ddev npm i
 
-dev: ## Start dev server
+dev: ## Start NPM dev server
 	@ddev npm run dev
 
 build: ## Build for production
@@ -61,12 +61,8 @@ db-export: ## Export database
 	@mkdir -p sql
 	@ddev export-db -f sql/$$(date +%Y%m%d%H%M%S)-backup.sql.gz
 
-clean: ## Clean project
-	@echo "\033[95m🧹 Cleaning project...\033[0m"
-	@git init -q
-	@git add .
-	@git clean -e .env -xdfq && rm -rf vendor
+ddev: conf up ## Start DDev server
 
-serve: conf up install dev
+start: conf up install ## Start DDev server and install dependencies
 
-server: conf up
+serve: conf up install dev ## Start DDev server, install dependencies and start NPM dev server
