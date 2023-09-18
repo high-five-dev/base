@@ -1,0 +1,37 @@
+{% extends "_layout" %}
+
+{% set title = entry.title %}
+
+{% set image = {
+    mode: 'crop',
+    width: 468,
+    height: 528,
+    quality: 100,
+    position: 'center-center',
+} %}
+
+{% set blocks = entry.contentblokken.with([['blok:afbeelding', {withTransforms: [image]}]]).all() %}
+
+{% block content %}
+    {% if blocks is not empty %}
+        {% for block in blocks %}
+            <article class="block">
+                <div class="block__content">
+                    {% if block.titel is not empty %}
+                        <header>
+                            <h2>{{ block.titel }}</h2>
+                        </header>
+                    {% endif %}
+                    {% if block.inhoud is not empty %}
+                        {{ block.inhoud }}
+                    {% endif %}
+                </div>
+                {% if block.afbeelding is not empty %}
+                    <div class="block__image">
+                        <img src="{{ block.afbeelding.first().getUrl(image) }}" loading="lazy" alt="{{ block.afbeelding.first().title }}">
+                    </div>
+                {% endif %}
+            </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

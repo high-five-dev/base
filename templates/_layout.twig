@@ -1,0 +1,18 @@
+{% set isHomepage = entry is defined and entry.uri == "__home__" ? true : false %}
+
+<!doctype html>
+
+<html lang="{{ craft.app.language }}">
+{% include "_includes/head" %}
+
+<body>
+    {% include "_includes/header" %}
+    <main class="main">
+        {% block content %}
+            <p>Make sure to define the `content` block in your template</p>
+        {% endblock %}
+    </main>
+    {% include "_includes/footer" %}
+    {% include "_includes/scripts" %}
+</body>
+</html>
