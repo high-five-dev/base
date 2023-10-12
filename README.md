@@ -1,4 +1,4 @@
-# Craft Base
+# Base
 
 Easily create a barebones Craft CMS website project.
 
@@ -8,7 +8,7 @@ Before creating a new project, you should ensure that your local machine has PHP
 
 After you have installed PHP, DDev and Composer, you may create a new project via the Composer `create-project` command:
 
-    composer create-project high-five/craft-base example-website.ext --stability=dev
+    composer create-project high-five/base example-website.ext --stability=dev
 
 
 After the project has been created, start the local development server using the Makefile's `start` command:
