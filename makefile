@@ -47,7 +47,7 @@ up:
 stop: ## Stop DDev environment
 	@ddev stop
 
-install: ## Install dependencies
+deps: ## Install dependencies
 	@ddev composer install
 	@ddev npm i
 
@@ -61,8 +61,11 @@ db-export: ## Export database
 	@mkdir -p sql
 	@ddev export-db -f sql/$$(date +%Y%m%d%H%M%S)-backup.sql.gz
 
+install: ## Install Craft CMS
+	@ddev craft install
+
 ddev: conf up ## Start DDev server
 
-start: conf up install ## Start DDev server and install dependencies
+start: conf up deps ## Start DDev server and install dependencies
 
-serve: conf up install dev ## Start DDev server, install dependencies and start NPM dev server
+serve: conf up deps dev ## Start DDev server, install dependencies and start NPM dev server

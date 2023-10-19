@@ -1,5 +1,3 @@
-/.ddev/*
-!/.ddev/docker-compose.vite.yaml
 /.idea
 /vendor
 /node_modules

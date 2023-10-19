@@ -17,17 +17,21 @@ After the project has been created, start the local development server using the
 
     make start
 
+The development server should now be running at `https://example-website.ext`. You are ready to install Craft CMS!
+
+    make install
+
 ## `make` commands
 
 Run `make` or `make help` for an overview of the available commands.
 
-| Command | Description |
-| --- | --- |
-| `make ddev` | Start DDev server |
-| `make start` | Start DDev server and install |dependencies
-| `make stop` | Stop DDev environment|
-| `make serve` | Start DDev server, install dependencies and start NPM dev server |
-| `make install` | Install dependencies |
-| `make dev` | Start NPM dev server |
-| `make build` | Build for production |
-| `make db-export` | Export the DDev database to the `./sql/` directory |
+| Command          | Description                                                      |
+|------------------|------------------------------------------------------------------|
+| `make ddev`      | Start DDEV server                                                |
+| `make deps`      | Install dependencies                                             |
+| `make start`     | Start DDEV server and install dependencies                       |
+| `make serve`     | Start DDEV server, install dependencies and start NPM dev server |
+| `make dev`       | Start NPM dev server                                             |
+| `make build`     | Build for production                                             |
+| `make install`   | Install Craft CMS                                                |
+| `make db-export` | Export the DDEV database to the `./sql/` directory               |
